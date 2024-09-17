@@ -49,11 +49,11 @@ app.use(limiter);
 
 app.use(bodyParser.json());
 
-const URI = process.env.MONGODB_URL;
+const URI = "mongodb+srv://user:password@cluster.mongodb.net/mydatabase?retryWrites=true&w=majority";
 
 // Session configuration
 app.use(session({
-  secret: process.env.SESSION_SECRET, // Use a strong
+  secret: "sessionsecret123", // Use a strong
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: URI }),

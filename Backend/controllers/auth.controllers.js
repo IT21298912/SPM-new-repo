@@ -42,6 +42,12 @@ const login = async (req, res) => {
         return res.status(400).json({ message: 'Email and password are required' });
     }
 
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'Invalid email format' });
+    }
+
     try {
         const user = await User.findOne({ email });
         if (!user) {
@@ -64,6 +70,7 @@ const login = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
+
 
 //token validation
 const generateToken = (user) => {
